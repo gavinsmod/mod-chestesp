@@ -39,10 +39,6 @@ class ModChestEsp : EspMod(
     "chestesp"
 ), BlockEntityRenderListener {
     init {
-//        val colorSetting = ColorSetting(
-//            "gavinsmod.settings.esp.chest.color",
-//            espConfig.chestColor
-//        )
         val colorSetting = SettingBuilder()
             .setTitle("gavinsmod.settings.esp.chest.color")
             .setColor(espConfig.chestColor)
