@@ -19,6 +19,8 @@
  */
 package com.peasenet.mods.esp
 
+import com.peasenet.main.Settings
+import com.peasenet.config.EspConfig
 import com.peasenet.settings.SettingBuilder
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.BlockEntityRender
@@ -41,10 +43,10 @@ class ModChestEsp : EspMod(
     init {
         val colorSetting = SettingBuilder()
             .setTitle("gavinsmod.settings.esp.chest.color")
-            .setColor(espConfig.chestColor)
+            .setColor(config.chestColor)
             .buildColorSetting()
         colorSetting.setCallback {
-            espConfig.chestColor = colorSetting.color
+            config.chestColor = colorSetting.color
         }
         addSetting(colorSetting)
     }
@@ -64,6 +66,12 @@ class ModChestEsp : EspMod(
         if (er.buffer == null) return
         if (er.entity is ChestBlockEntity || er.entity is ShulkerBoxBlockEntity
             || er.entity is EnderChestBlockEntity
-        ) RenderUtils.drawBox(er.stack, er.buffer, box, espConfig.chestColor, espConfig.alpha)
+        ) RenderUtils.drawBox(er.stack, er.buffer, box, config.chestColor, config.alpha)
+    }
+    companion object {
+        private val config: EspConfig
+        get() {
+            return Settings.getConfig<EspConfig>("esp")
+        }
     }
 }
